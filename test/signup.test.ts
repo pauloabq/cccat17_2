@@ -39,8 +39,7 @@ test("Não deve criar uma conta para o passageiro com nome inválido", async fun
     cpf: "28722437045",
     isPassenger: true
   }
-  const output = await signup(input);
-  expect(output).toBe(-3);
+  await expect(() => signup(input)).rejects.toThrow("Invalid name");
 });
 
 test("Não deve criar uma conta para o passageiro com email inválido", async function () {
@@ -50,8 +49,7 @@ test("Não deve criar uma conta para o passageiro com email inválido", async fu
     cpf: "28722437045",
     isPassenger: true
   }
-  const output = await signup(input);
-  expect(output).toBe(-2);
+  await expect(() => signup(input)).rejects.toThrow("Invalid email");
 });
 
 test("Não deve criar uma conta para o passageiro com cpf inválido", async function () {
@@ -61,8 +59,7 @@ test("Não deve criar uma conta para o passageiro com cpf inválido", async func
     cpf: "28722437045123",
     isPassenger: true
   }
-  const output = await signup(input);
-  expect(output).toBe(-1);
+  await expect(() => signup(input)).rejects.toThrow("Invalid CPF");
 });
 
 test("Não deve criar uma conta com e-mail duplicado", async function () {
@@ -73,8 +70,7 @@ test("Não deve criar uma conta com e-mail duplicado", async function () {
     isPassenger: true
   }
   await signup(input);
-  const output = await signup(input);
-  expect(output).toBe(-4);
+  await expect(() => signup(input)).rejects.toThrow("Account already exists");
 });
 
 test("Não deve criar uma conta com placa inválida", async function () {
@@ -85,6 +81,5 @@ test("Não deve criar uma conta com placa inválida", async function () {
     isDriver: true,
     carPlate: "AAA999"
   }
-  const output = await signup(input);
-  expect(output).toBe(-5);
+  await expect(() => signup(input)).rejects.toThrow("Invalid plate")
 });
