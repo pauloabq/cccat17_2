@@ -29,6 +29,7 @@ test("Deve criar uma conta de motorista", async function () {
   expect(outputGetAccount.name).toBe(input.name);
   expect(outputGetAccount.email).toBe(input.email);
   expect(outputGetAccount.cpf).toBe(input.cpf);
+  expect(outputGetAccount.car_plate).toBe(input.carPlate);
 });
 
 test("Não deve criar uma conta para o passageiro com nome inválido", async function () {
