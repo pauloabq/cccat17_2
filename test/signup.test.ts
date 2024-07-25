@@ -1,4 +1,4 @@
-import { signup } from "../src/signup";
+import { getAccount, signup } from "../src/signup";
 
 test("Deve criar uma conta para o passageiro", async function () {
   const input = {
@@ -7,6 +7,10 @@ test("Deve criar uma conta para o passageiro", async function () {
     cpf: "28722437045",
     isPassenger: true
   }
-  const output = await signup(input);
-  expect(output.accountId).toBeDefined();
+  const outputSignUp = await signup(input);
+  expect(outputSignUp.accountId).toBeDefined();
+  const outputGetAccount = await getAccount(outputSignUp.accountId);
+  expect(outputGetAccount.name).toBe(input.name);
+  expect(outputGetAccount.email).toBe(input.email);
+  expect(outputGetAccount.cpf).toBe(input.cpf);
 });
